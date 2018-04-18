@@ -5,15 +5,17 @@ CXX = g++
 #  -Wall turns on most, but not all, compiler warnings
 CXXFLAGS  = -Wall
 
-LDFLAGS = "-Wl,-rpath,../lib" -L../lib -lLexActivator
+LDFLAGS = "-Wl,-rpath,." -L. -lLexFloatClient
+#LDFLAGS += -Wl,-Bstatic -lLexFloatClient
+
 
 # the build target executable:
-TARGET = Sample
+TARGET = FloatSample
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).cpp
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(TARGET) $(TARGET).cpp
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(TARGET).cpp $(LDFLAGS)
 
 clean:
 	$(RM) $(TARGET)
