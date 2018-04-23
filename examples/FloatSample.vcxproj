@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="LexFloatClient.h" />
+    <ClInclude Include="LexFloatStatusCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FloatSample.cpp" />

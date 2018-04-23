@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 #if _WIN32
 	status = GetHandle(L"PASTE_PRODUCT_ID", &handle);
 #else
-	status = GetHandle("63dfd63e-ed71-4f84-9236-02ee0ddb062c", &handle);
+	status = GetHandle("PASTE_PRODUCT_ID", &handle);
 #endif
 	if (LF_OK != status)
 	{
@@ -76,8 +76,15 @@ int main(int argc, char *argv[])
 	printf("Success! License Acquired. Press enter to get the license metadata...\n");
 	getchar();
 
-	char buffer[256]="good";
+#if _WIN32
+	wchar_t buffer[256];
+	status = GetLicenseMetadata(handle, L"key1", buffer, 256);
+#else
+	char buffer[256];
 	status = GetLicenseMetadata(handle, "key1", buffer, 256);
+#endif
+
+	
 	if (LF_OK != status)
 	{
 		printf("Metadata request error code: %d\n", status);
