@@ -72,7 +72,7 @@ enum LexFloatStatusCodes
     /*
         CODE: LF_E_NO_FREE_LICENSE
 
-        MESSAGE: No free license is available
+        MESSAGE: No free license is available.
     */
 
     LF_E_NO_FREE_LICENSE = 47,
