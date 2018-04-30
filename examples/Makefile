@@ -5,9 +5,14 @@ CXX = g++
 #  -Wall turns on most, but not all, compiler warnings
 CXXFLAGS  = -Wall
 
+# Dynamic linking 
 LDFLAGS = "-Wl,-rpath,." -L. -lLexFloatClient
-#LDFLAGS += -Wl,-Bstatic -lLexFloatClient
 
+# Uncomment following line for static linking on Linux
+#LDFLAGS += -Wl,-Bstatic -L. -lLexFloatClient -Wl,-Bdynamic -lpthread -lssl3 -lnss3 -lnspr4
+
+# Uncomment following line for static linking on MacOS
+#LDFLAGS += -L. -lLexFloatClient -framework CoreFoundation -framework SystemConfiguration -framework Security
 
 # the build target executable:
 TARGET = FloatSample
