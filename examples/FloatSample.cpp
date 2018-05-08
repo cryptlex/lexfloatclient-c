@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LexFloatClient.h"
 
-/* Uncomment for Windows static build 
+// Uncomment following for Windows static build
+/*
 #if _WIN32
+#define LEXFLOATCLIENT__STATIC
 #pragma comment(lib, "winhttp")
 #if _WIN64
 #pragma comment(lib, "x64/libcurl_MD")
+#pragma comment(lib, "x64/LexFloatClient")
 #else
 #pragma comment(lib, "x86/libcurl_MD")
+#pragma comment(lib, "x86/LexFloatClient")
 #endif
 #endif
 */
@@ -20,6 +23,8 @@
 #pragma comment(lib, "x86/LexFloatClient")
 #endif
 #endif
+
+#include "LexFloatClient.h"
 
 void LF_CC LicenceRefreshCallback(uint32_t status)
 {
