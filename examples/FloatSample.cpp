@@ -26,24 +26,21 @@
 
 #include "LexFloatClient.h"
 
-void LF_CC LicenceRefreshCallback(uint32_t status)
+void LF_CC LicenceRenewCallback(uint32_t status)
 {
 	switch (status)
 	{
-	case LF_E_LICENSE_EXPIRED:
-		printf("The lease expired before it could be renewed.\n");
+	case LF_OK:
+		printf("The license lease has renewed successfully.\n");
+		break;
+	case LF_E_LICENSE_NOT_FOUND:
+		printf("The license expired before it could be renewed.\n");
 		break;
 	case LF_E_LICENSE_EXPIRED_INET:
-		printf("The lease expired due to network connection failure.\n");
-		break;
-	case LF_E_SERVER_TIME:
-		printf("The lease expired because Server System time was modified.\n");
-		break;
-	case LF_E_TIME:
-		printf("The lease expired because Client System time was modified.\n");
+		printf("The license expired due to network connection failure.\n");
 		break;
 	default:
-		printf("The lease expired due to some other reason.\n");
+		printf("The license renew failed due to other reason. Error code: %d\n", status);
 		break;
 	}
 }
@@ -51,11 +48,10 @@ void LF_CC LicenceRefreshCallback(uint32_t status)
 int main(int argc, char *argv[])
 {
 	int status;
-	uint32_t handle;
 #if _WIN32
-	status = GetHandle(L"PASTE_PRODUCT_ID", &handle);
+	status = SetProductId(L"PASTE_PRODUCT_ID");
 #else
-	status = GetHandle("PASTE_PRODUCT_ID", &handle);
+	status = SetHostProductId("PASTE_PRODUCT_ID");
 #endif
 	if (LF_OK != status)
 	{
@@ -63,10 +59,11 @@ int main(int argc, char *argv[])
 		getchar();
 		return status;
 	}
+
 #if _WIN32
-	status = SetFloatServer(handle, L"localhost", 8090);
+	status = SetFloatServer(L"http://localhost:8090");
 #else
-	status = SetFloatServer(handle, "localhost", 8090);
+	status = SetHostUrl("http://localhost:8090");
 #endif
 	if (LF_OK != status)
 	{
@@ -74,22 +71,25 @@ int main(int argc, char *argv[])
 		getchar();
 		return status;
 	}
-	status = SetLicenseCallback(handle, LicenceRefreshCallback);
+
+	status = SetFloatingLicenseCallback(LicenceRenewCallback);
 	if (LF_OK != status)
 	{
 		printf("Error code: %d", status);
 		getchar();
 		return status;
 	}
-	
-	status = RequestLicense(handle);
+
+	status = RequestFloatingLicense();
 	if (LF_OK != status)
 	{
 		printf("Request license error code: %d", status);
 		getchar();
 		return status;
 	}
-	printf("Success! License Acquired. Press enter to get the license metadata...\n");
+	printf("Success! License acquired.\n");
+
+	printf("Press enter to get license metadata ...\n");
 	getchar();
 
 #if _WIN32
@@ -97,30 +97,29 @@ int main(int argc, char *argv[])
 	status = GetLicenseMetadata(handle, L"key1", buffer, 256);
 #else
 	char buffer[256];
-	status = GetLicenseMetadata(handle, "key1", buffer, 256);
+	status = GetHostLicenseMetadata("key1", buffer, 256);
 #endif
 
-	
-	if (LF_OK != status)
-	{
-		printf("Metadata request error code: %d\n", status);
-	}	
-	else
+	if (LF_OK == status)
 	{
 		printf("Metadata: %s\n", buffer);
+	}
+	else
+	{
+		printf("Error getting metadata: %d\n", status);
 	}
 
 	printf("Press enter to drop the license ...\n");
 	getchar();
-	status = DropLicense(handle);
+
+	status = DropFloatingLicense();
 	if (LF_OK != status)
 	{
-		printf("Drop license error code: %d", status);
+		printf("Dropping license error code: %d", status);
 		getchar();
 		return status;
 	}
 	printf("Success! License dropped.\n");
 	getchar();
-	GlobalCleanUp();
 	return 0;
 }

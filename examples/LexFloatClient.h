@@ -61,150 +61,129 @@
 typedef void (LF_CC *CallbackType)(uint32_t);
 
 /*
-    FUNCTION: GetHandle()
+    FUNCTION: SetHostProductId()
 
-    PURPOSE: Sets the product id of your application and gets the new handle
-    which will be used for the product id.
-
-    Dropping the license invalidates the used handle, so make sure you request
-    a new handle after dropping the license.
+    PURPOSE: Sets the product id of your application.
 
     PARAMETERS:
     * productId - the unique product id of your application as mentioned
       on the product page in the dashboard.
-    * handle - pointer to the integer that receives the value
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID
 */
-
-LEXFLOATCLIENT_API HRESULT LF_CC GetHandle(CSTRTYPE productId, uint32_t *handle);
+LEXFLOATCLIENT_API HRESULT LF_CC SetHostProductId(CSTRTYPE productId);
 
 /*
-    FUNCTION: SetFloatServer()
+    FUNCTION: SetHostUrl()
 
     PURPOSE: Sets the network address of the LexFloatServer.
 
+    The url format should be: http://[ip or hostname]:[port]
+
     PARAMETERS:
-    * handle - handle for the product id
-    * hostAddress - hostname or the IP address of the LexFloatServer
-    * port - port of the LexFloatServer
+    * hostUrl - url string having the correct format
 
-    RETURN CODES: LF_OK, LF_E_HANDLE, LF_E_PRODUCT_ID, LF_FAIL
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_HOST_URL
 */
-
-LEXFLOATCLIENT_API HRESULT LF_CC SetFloatServer(uint32_t handle, CSTRTYPE hostAddress, unsigned short port);
+LEXFLOATCLIENT_API HRESULT LF_CC SetHostUrl(CSTRTYPE hostUrl);
 
 /*
-    FUNCTION: SetLicenseCallback()
+    FUNCTION: SetFloatingLicenseCallback()
 
-    PURPOSE: Sets refresh license error callback function.
+    PURPOSE: Sets the renew license callback function.
 
-    Whenever the lease expires, a refresh lease request is sent to the
-    server. If the lease fails to refresh, refresh license callback function
-    gets invoked with the following status error codes: LF_E_LICENSE_EXPIRED,
-    LF_E_LICENSE_EXPIRED_INET, LF_E_SERVER_TIME, LF_E_TIME.
+    Whenever the license lease is about to expire, a renew request is sent to the
+    server. When the request completes, the license callback function
+    gets invoked with one of the following status codes:
+
+    LF_OK, LF_E_INET, LF_E_LICENSE_EXPIRED_INET, LF_E_LICENSE_NOT_FOUND, LF_E_CLIENT, LF_E_IP,
+    LF_E_SERVER, LF_E_TIME, LF_E_SERVER_LICENSE_NOT_ACTIVATED,LF_E_SERVER_TIME_MODIFIED,
+    LF_E_SERVER_LICENSE_SUSPENDED, LF_E_SERVER_LICENSE_EXPIRED, LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER
 
     PARAMETERS:
-    * handle - handle for the product id
     * callback - name of the callback function
 
-    RETURN CODES: LF_OK, LF_E_HANDLE, LF_E_PRODUCT_ID
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID
 */
-
-LEXFLOATCLIENT_API HRESULT LF_CC SetLicenseCallback(uint32_t handle, CallbackType callback);
+LEXFLOATCLIENT_API HRESULT LF_CC SetFloatingLicenseCallback(CallbackType callback);
 
 /*
-    FUNCTION: RequestLicense()
+    FUNCTION: SetFloatingClientMetadata()
 
-    PURPOSE: Sends the request to lease the license from the LexFloatServer.
+    PURPOSE: Sets the floating client metadata.
+
+    The  metadata appears along with the license details of the license
+    in LexFloatServer dashboard.
 
     PARAMETERS:
-    * handle - handle for the product id
+    * key - string of maximum length 256 characters with utf-8 encoding.
+    * value - string of maximum length 256 characters with utf-8 encoding.
 
-    RETURN CODES: LF_OK, LF_FAIL, LF_E_HANDLE, LF_E_PRODUCT_ID, LF_E_SERVER_ADDRESS,
-    LF_E_CALLBACK, LF_E_LICENSE_EXISTS, LF_E_INET, LF_E_NO_FREE_LICENSE, LF_E_TIME,
-    LF_E_SERVER_TIME
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_METADATA_KEY_LENGTH,
+    LF_E_METADATA_VALUE_LENGTH, LF_E_ACTIVATION_METADATA_LIMIT
 */
-
-LEXFLOATCLIENT_API HRESULT LF_CC RequestLicense(uint32_t handle);
+LEXFLOATCLIENT_API HRESULT LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
 
 /*
-    FUNCTION: DropLicense()
+    FUNCTION: GetHostLicenseMetadata()
 
-    PURPOSE: Sends the request to drop the license from the LexFloatServer.
-
-    Call this function before you exit your application to prevent zombie licenses.
+    PURPOSE: Get the value of the license metadata field associated with the LexFloatServer license.
 
     PARAMETERS:
-    * handle - handle for the product id
-
-    RETURN CODES: LF_OK, LF_FAIL, LF_E_HANDLE, LF_E_PRODUCT_ID, LF_E_SERVER_ADDRESS,
-    LF_E_CALLBACK, LF_E_INET, LF_E_TIME, LF_E_SERVER_TIME
-*/
-
-LEXFLOATCLIENT_API HRESULT LF_CC DropLicense(uint32_t handle);
-
-/*
-    FUNCTION: HasLicense()
-
-    PURPOSE: Checks whether any license has been leased or not. If yes,
-    it retuns LF_OK.
-
-    PARAMETERS:
-    * handle - handle for the product id
-
-    RETURN CODES: LF_OK, LF_FAIL, LF_E_HANDLE, LF_E_PRODUCT_ID, LF_E_SERVER_ADDRESS,
-    LF_E_CALLBACK
-*/
-
-LEXFLOATCLIENT_API HRESULT LF_CC HasLicense(uint32_t handle);
-
-/*
-    FUNCTION: GetLicenseMetadata()
-
-    PURPOSE: Get the value of the license metadata field associated with the float server key.
-
-    PARAMETERS:
-    * handle - handle for the product id
     * key - key of the metadata field whose value you want to get
     * value - pointer to a buffer that receives the value of the string
     * length - size of the buffer pointed to by the value parameter
 
-    RETURN CODES: LF_OK, LF_FAIL, LF_E_HANDLE, LF_E_PRODUCT_ID, LF_E_SERVER_ADDRESS,
-    LF_E_CALLBACK, LF_E_BUFFER_SIZE, LF_E_METADATA_KEY_NOT_FOUND, LF_E_INET, LF_E_TIME,
-    LF_E_SERVER_TIME
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_BUFFER_SIZE,
+    LF_E_METADATA_KEY_NOT_FOUND
 */
-
-LEXFLOATCLIENT_API HRESULT LF_CC GetLicenseMetadata(uint32_t handle, CSTRTYPE key, STRTYPE value, uint32_t length);
+LEXFLOATCLIENT_API HRESULT LF_CC GetHostLicenseMetadata(CSTRTYPE key, STRTYPE value, uint32_t length);
 
 /*
-    FUNCTION: FindHandle()
+    FUNCTION: GetHostLicenseExpiryDate()
 
-    PURPOSE: Gets the handle set for the product id.
-
-    Dropping the license invalidates the used handle, so make sure you request
-    a new handle after dropping the license.
+    PURPOSE: Gets the license expiry date timestamp of the LexFloatServer license.
 
     PARAMETERS:
-    * productId - the unique product id of your application as mentioned
-      on the product page in the dashboard.
-    * handle - pointer to the integer that receives the value
+    * expiryDate - pointer to the integer that receives the value
 
-    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_HANDLE
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
 */
+LEXFLOATCLIENT_API HRESULT LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
 
-LEXFLOATCLIENT_API HRESULT LF_CC FindHandle(CSTRTYPE productId, uint32_t *handle);
 
 /*
-    FUNCTION: GlobalCleanUp()
+    FUNCTION: RequestFloatingLicense()
 
-    PURPOSE: Releases the resources acquired for sending network requests.
+    PURPOSE: Sends the request to lease the license from the LexFloatServer.
 
-    Call this function before you exit your application.
-
-    RETURN CODES: LF_OK
-
-    NOTE: This function does not drop any leased license on the LexFloatServer.
+    RETURN CODES: LF_OK, LF_FAIL, LF_E_PRODUCT_ID, LF_E_LICENSE_EXISTS, LF_E_HOST_URL,
+    LF_E_CALLBACK, LA_E_LICENSE_LIMIT_REACHED, LF_E_INET, LF_E_TIME, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
+    LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
 */
+LEXFLOATCLIENT_API HRESULT LF_CC RequestFloatingLicense();
 
-LEXFLOATCLIENT_API HRESULT LF_CC GlobalCleanUp();
+/*
+    FUNCTION: DropFloatingLicense()
+
+    PURPOSE: Sends the request to the LexFloatServer to free the license.
+
+    Call this function before you exit your application to prevent zombie licenses.
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_HOST_URL, LF_E_CALLBACK,
+    LF_E_INET, LF_E_LICENSE_NOT_FOUND, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
+    LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
+*/
+LEXFLOATCLIENT_API HRESULT LF_CC DropFloatingLicense();
+
+/*
+    FUNCTION: HasFloatingLicense()
+
+    PURPOSE: Checks whether any license has been leased or not. If yes,
+    it retuns LF_OK.
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
+*/
+LEXFLOATCLIENT_API HRESULT LF_CC HasFloatingLicense();
