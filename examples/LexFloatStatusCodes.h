@@ -70,7 +70,7 @@ enum LexFloatStatusCodes
         CODE: LF_E_LICENSE_NOT_FOUND
 
         MESSAGE: License does not exist on server or has already expired. This
-        happenswhen the request to refresh the license is delayed.
+        happens when the request to refresh the license is delayed.
     */
     LF_E_LICENSE_NOT_FOUND = 47,
 
@@ -84,11 +84,11 @@ enum LexFloatStatusCodes
     LF_E_LICENSE_EXPIRED_INET = 48,
 
     /*
-        CODE: LA_E_LICENSE_LIMIT_REACHED
+        CODE: LF_E_LICENSE_LIMIT_REACHED
 
         MESSAGE: The server has reached it's allowed limit of floating licenses.
     */
-    LA_E_LICENSE_LIMIT_REACHED = 49,
+    LF_E_LICENSE_LIMIT_REACHED = 49,
 
     /*
         CODE: LF_E_BUFFER_SIZE
@@ -105,21 +105,21 @@ enum LexFloatStatusCodes
     LF_E_METADATA_KEY_NOT_FOUND = 51,
 
     /*
-        CODE: LA_E_METADATA_KEY_LENGTH
+        CODE: LF_E_METADATA_KEY_LENGTH
 
         MESSAGE: Metadata key length is more than 256 characters.
     */
     LF_E_METADATA_KEY_LENGTH = 52,
 
     /*
-        CODE: LA_E_METADATA_VALUE_LENGTH
+        CODE: LF_E_METADATA_VALUE_LENGTH
 
         MESSAGE: Metadata value length is more than 256 characters.
     */
     LF_E_METADATA_VALUE_LENGTH = 53,
 
     /*
-        CODE: LA_E_ACTIVATION_METADATA_LIMIT
+        CODE: LF_E_ACTIVATION_METADATA_LIMIT
 
         MESSAGE: The floating client has reached it's metadata fields limit.
     */
@@ -180,7 +180,7 @@ enum LexFloatStatusCodes
 
         MESSAGE: The grace period for server license is over.
     */
-    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER = 76,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER = 76
 };
 
 #endif // LEX_FLOAT_STATUS_CODES_H
