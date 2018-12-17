@@ -11,7 +11,7 @@
     #include <windows.h>
 
 	#ifdef LEXFLOATCLIENT_EXPORTS
-		#ifdef LEXFLOATCLIENT__STATIC
+        #ifdef LEXFLOATCLIENT_STATIC
             #define LEXFLOATCLIENT_API extern "C"
         #else
             #define LEXFLOATCLIENT_API extern "C" __declspec(dllexport)
