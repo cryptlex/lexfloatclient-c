@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 {
 	int status;
 #if _WIN32
-	status = SetProductId(L"PASTE_PRODUCT_ID");
+	status = SetHostProductId(L"PASTE_PRODUCT_ID");
 #else
 	status = SetHostProductId("PASTE_PRODUCT_ID");
 #endif
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 	}
 
 #if _WIN32
-	status = SetFloatServer(L"http://localhost:8090");
+	status = SetHostUrl(L"http://localhost:8090");
 #else
 	status = SetHostUrl("http://localhost:8090");
 #endif
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 
 #if _WIN32
 	wchar_t buffer[256];
-	status = GetLicenseMetadata(handle, L"key1", buffer, 256);
+	status = GetHostLicenseMetadata(handle, L"key1", buffer, 256);
 #else
 	char buffer[256];
 	status = GetHostLicenseMetadata("key1", buffer, 256);
