@@ -255,7 +255,6 @@ LEXFLOATCLIENT_API int LF_CC DecrementFloatingClientMeterAttributeUses(CSTRTYPE 
 
     PARAMETERS:
     * name - name of the meter attribute
-    * decrement - the decrement value
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_HOST_URL, LF_E_METER_ATTRIBUTE_NOT_FOUND,
     LF_E_INET, LF_E_LICENSE_NOT_FOUND, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
