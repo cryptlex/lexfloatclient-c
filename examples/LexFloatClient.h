@@ -41,7 +41,6 @@
 	typedef wchar_t* STRTYPE;
 #else
     #define LF_CC
-    typedef int32_t HRESULT;
     #if __GNUC__ >= 4
         #ifdef __cplusplus
             #define LEXFLOATCLIENT_API extern "C" __attribute__((visibility("default")))
@@ -71,7 +70,7 @@ typedef void (LF_CC *CallbackType)(uint32_t);
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID
 */
-LEXFLOATCLIENT_API HRESULT LF_CC SetHostProductId(CSTRTYPE productId);
+LEXFLOATCLIENT_API int LF_CC SetHostProductId(CSTRTYPE productId);
 
 /*
     FUNCTION: SetHostUrl()
@@ -85,7 +84,7 @@ LEXFLOATCLIENT_API HRESULT LF_CC SetHostProductId(CSTRTYPE productId);
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_HOST_URL
 */
-LEXFLOATCLIENT_API HRESULT LF_CC SetHostUrl(CSTRTYPE hostUrl);
+LEXFLOATCLIENT_API int LF_CC SetHostUrl(CSTRTYPE hostUrl);
 
 /*
     FUNCTION: SetFloatingLicenseCallback()
@@ -105,7 +104,7 @@ LEXFLOATCLIENT_API HRESULT LF_CC SetHostUrl(CSTRTYPE hostUrl);
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID
 */
-LEXFLOATCLIENT_API HRESULT LF_CC SetFloatingLicenseCallback(CallbackType callback);
+LEXFLOATCLIENT_API int LF_CC SetFloatingLicenseCallback(CallbackType callback);
 
 /*
     FUNCTION: SetFloatingClientMetadata()
@@ -122,7 +121,7 @@ LEXFLOATCLIENT_API HRESULT LF_CC SetFloatingLicenseCallback(CallbackType callbac
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_METADATA_KEY_LENGTH,
     LF_E_METADATA_VALUE_LENGTH, LF_E_ACTIVATION_METADATA_LIMIT
 */
-LEXFLOATCLIENT_API HRESULT LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
+LEXFLOATCLIENT_API int LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
 
 /*
     FUNCTION: GetHostLicenseMetadata()
@@ -137,7 +136,21 @@ LEXFLOATCLIENT_API HRESULT LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYP
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_BUFFER_SIZE,
     LF_E_METADATA_KEY_NOT_FOUND
 */
-LEXFLOATCLIENT_API HRESULT LF_CC GetHostLicenseMetadata(CSTRTYPE key, STRTYPE value, uint32_t length);
+LEXFLOATCLIENT_API int LF_CC GetHostLicenseMetadata(CSTRTYPE key, STRTYPE value, uint32_t length);
+
+/*
+    FUNCTION: GetHostLicenseMeterAttribute()
+
+    PURPOSE: Gets the license meter attribute allowed uses and total uses associated with the LexFloatServer license.
+
+    PARAMETERS:
+    * name - name of the meter attribute
+    * allowedUses - pointer to the integer that receives the value
+    * totalUses - pointer to the integer that receives the value
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_METER_ATTRIBUTE_NOT_FOUND
+*/
+LEXFLOATCLIENT_API int LF_CC GetHostLicenseMeterAttribute(CSTRTYPE name, uint32_t *allowedUses, uint32_t *totalUses);
 
 /*
     FUNCTION: GetHostLicenseExpiryDate()
@@ -149,8 +162,20 @@ LEXFLOATCLIENT_API HRESULT LF_CC GetHostLicenseMetadata(CSTRTYPE key, STRTYPE va
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
 */
-LEXFLOATCLIENT_API HRESULT LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
+LEXFLOATCLIENT_API int LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
 
+/*
+    FUNCTION: GetFloatingClientMeterAttributeUses()
+
+    PURPOSE: Gets the meter attribute uses consumed by the floating client.
+
+    PARAMETERS:
+    * name - name of the meter attribute
+    * allowedUses - pointer to the integer that receives the value
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_METER_ATTRIBUTE_NOT_FOUND
+*/
+LEXFLOATCLIENT_API int LF_CC GetFloatingClientMeterAttributeUses(CSTRTYPE name, uint32_t *uses);
 
 /*
     FUNCTION: RequestFloatingLicense()
@@ -162,7 +187,7 @@ LEXFLOATCLIENT_API HRESULT LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
     LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
     LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
 */
-LEXFLOATCLIENT_API HRESULT LF_CC RequestFloatingLicense();
+LEXFLOATCLIENT_API int LF_CC RequestFloatingLicense();
 
 /*
     FUNCTION: DropFloatingLicense()
@@ -176,7 +201,7 @@ LEXFLOATCLIENT_API HRESULT LF_CC RequestFloatingLicense();
     LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
     LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
 */
-LEXFLOATCLIENT_API HRESULT LF_CC DropFloatingLicense();
+LEXFLOATCLIENT_API int LF_CC DropFloatingLicense();
 
 /*
     FUNCTION: HasFloatingLicense()
@@ -186,4 +211,55 @@ LEXFLOATCLIENT_API HRESULT LF_CC DropFloatingLicense();
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
 */
-LEXFLOATCLIENT_API HRESULT LF_CC HasFloatingLicense();
+LEXFLOATCLIENT_API int LF_CC HasFloatingLicense();
+
+/*
+    FUNCTION: IncrementFloatingClientMeterAttributeUses()
+
+    PURPOSE: Increments the meter attribute uses of the activation.
+
+    PARAMETERS:
+    * name - name of the meter attribute
+    * increment - the increment value
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_HOST_URL, LF_E_METER_ATTRIBUTE_NOT_FOUND,
+    LF_E_INET, LF_E_LICENSE_NOT_FOUND, LF_E_CLIENT, LF_E_IP, LF_E_SERVER, LF_E_METER_ATTRIBUTE_USES_LIMIT_REACHED,
+    LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
+
+*/
+LEXFLOATCLIENT_API int LF_CC IncrementFloatingClientMeterAttributeUses(CSTRTYPE name, uint32_t increment);
+
+/*
+    FUNCTION: DecrementFloatingClientMeterAttributeUses()
+
+    PURPOSE: Decrements the meter attribute uses of the activation.
+
+    PARAMETERS:
+    * name - name of the meter attribute
+    * decrement - the decrement value
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_HOST_URL, LF_E_METER_ATTRIBUTE_NOT_FOUND,
+    LF_E_INET, LF_E_LICENSE_NOT_FOUND, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
+    LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
+
+    NOTE: If the decrement is more than the current uses, it resets the uses to 0.
+*/
+LEXFLOATCLIENT_API int LF_CC DecrementFloatingClientMeterAttributeUses(CSTRTYPE name, uint32_t decrement);
+
+/*
+    FUNCTION: ResetFloatingClientMeterAttributeUses()
+
+    PURPOSE: Resets the meter attribute uses consumed by the activation.
+
+    PARAMETERS:
+    * name - name of the meter attribute
+    * decrement - the decrement value
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_HOST_URL, LF_E_METER_ATTRIBUTE_NOT_FOUND,
+    LF_E_INET, LF_E_LICENSE_NOT_FOUND, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
+    LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
+*/
+LEXFLOATCLIENT_API int LF_CC ResetFloatingClientMeterAttributeUses(CSTRTYPE name);

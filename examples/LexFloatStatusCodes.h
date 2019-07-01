@@ -126,6 +126,20 @@ enum LexFloatStatusCodes
     LF_E_FLOATING_CLIENT_METADATA_LIMIT = 54,
 
     /*
+        CODE: LF_E_METER_ATTRIBUTE_NOT_FOUND
+
+        MESSAGE: The meter attribute does not exist.
+    */
+    LF_E_METER_ATTRIBUTE_NOT_FOUND = 55,
+
+    /*
+        CODE: LF_E_METER_ATTRIBUTE_USES_LIMIT_REACHED
+
+        MESSAGE: The meter attribute has reached it's usage limit.
+    */
+    LF_E_METER_ATTRIBUTE_USES_LIMIT_REACHED = 56,
+
+    /*
         CODE: LF_E_IP
 
         MESSAGE: IP address is not allowed.
