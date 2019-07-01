@@ -216,7 +216,7 @@ LEXFLOATCLIENT_API int LF_CC HasFloatingLicense();
 /*
     FUNCTION: IncrementFloatingClientMeterAttributeUses()
 
-    PURPOSE: Increments the meter attribute uses of the activation.
+    PURPOSE: Increments the meter attribute uses of the floating client.
 
     PARAMETERS:
     * name - name of the meter attribute
@@ -233,7 +233,7 @@ LEXFLOATCLIENT_API int LF_CC IncrementFloatingClientMeterAttributeUses(CSTRTYPE 
 /*
     FUNCTION: DecrementFloatingClientMeterAttributeUses()
 
-    PURPOSE: Decrements the meter attribute uses of the activation.
+    PURPOSE: Decrements the meter attribute uses of the floating client.
 
     PARAMETERS:
     * name - name of the meter attribute
@@ -251,7 +251,7 @@ LEXFLOATCLIENT_API int LF_CC DecrementFloatingClientMeterAttributeUses(CSTRTYPE 
 /*
     FUNCTION: ResetFloatingClientMeterAttributeUses()
 
-    PURPOSE: Resets the meter attribute uses consumed by the activation.
+    PURPOSE: Resets the meter attribute uses consumed by the floating client.
 
     PARAMETERS:
     * name - name of the meter attribute
