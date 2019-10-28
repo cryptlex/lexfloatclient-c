@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 
 #if _WIN32
 	wchar_t buffer[256];
-	status = GetHostLicenseMetadata(handle, L"key1", buffer, 256);
+	status = GetHostLicenseMetadata(L"key1", buffer, 256);
 #else
 	char buffer[256];
 	status = GetHostLicenseMetadata("key1", buffer, 256);
