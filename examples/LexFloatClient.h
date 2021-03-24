@@ -148,6 +148,7 @@ LEXFLOATCLIENT_API int LF_CC GetHostLicenseMetadata(CSTRTYPE key, STRTYPE value,
     * name - name of the meter attribute
     * allowedUses - pointer to the integer that receives the value
     * totalUses - pointer to the integer that receives the value
+    * grossUses - pointer to the integer that receives the value
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_METER_ATTRIBUTE_NOT_FOUND
 */
@@ -184,7 +185,7 @@ LEXFLOATCLIENT_API int LF_CC GetFloatingClientMeterAttributeUses(CSTRTYPE name, 
     PURPOSE: Sends the request to lease the license from the LexFloatServer.
 
     RETURN CODES: LF_OK, LF_FAIL, LF_E_PRODUCT_ID, LF_E_LICENSE_EXISTS, LF_E_HOST_URL,
-    LF_E_CALLBACK, LA_E_LICENSE_LIMIT_REACHED, LF_E_INET, LF_E_TIME, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
+    LF_E_CALLBACK, LF_E_LICENSE_LIMIT_REACHED, LF_E_INET, LF_E_TIME, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
     LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
     LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
 */
