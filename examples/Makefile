@@ -9,7 +9,7 @@ CXXFLAGS  = -Wall
 LDFLAGS = "-Wl,-rpath,." -L. -lLexFloatClient
 
 # Uncomment following line for static linking on Linux
-#LDFLAGS += -Wl,-Bstatic -L. -lLexFloatClient -Wl,-Bdynamic -lpthread -lssl3 -lnss3 -lnspr4
+#LDFLAGS += -Wl,-Bstatic -L. -lLexFloatClient -Wl,-Bdynamic -lpthread
 
 # Uncomment following line for static linking on MacOS
 #LDFLAGS += -L. -lLexFloatClient -framework CoreFoundation -framework SystemConfiguration -framework Security
