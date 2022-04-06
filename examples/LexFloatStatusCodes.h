@@ -140,6 +140,20 @@ enum LexFloatStatusCodes
     LF_E_METER_ATTRIBUTE_USES_LIMIT_REACHED = 56,
 
     /*
+        CODE: LF_E_PRODUCT_VERSION_NOT_LINKED
+
+        MESSAGE: No product version is linked with the license.
+    */
+    LF_E_PRODUCT_VERSION_NOT_LINKED = 57,
+
+    /*
+        CODE: LF_E_FEATURE_FLAG_NOT_FOUND
+
+        MESSAGE: The product version feature flag does not exist.
+    */
+    LF_E_FEATURE_FLAG_NOT_FOUND = 58,
+
+    /*
         CODE: LF_E_IP
 
         MESSAGE: IP address is not allowed.
