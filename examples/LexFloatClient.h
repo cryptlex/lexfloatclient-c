@@ -125,6 +125,47 @@ LEXFLOATCLIENT_API int LF_CC SetFloatingLicenseCallback(CallbackType callback);
 LEXFLOATCLIENT_API int LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
 
 /*
+    FUNCTION: GetProductVersionName()
+
+    PURPOSE: Gets the product version name.
+
+    PARAMETERS:
+    * name - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the name parameter
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_PRODUCT_VERSION_NOT_LINKED, LF_E_BUFFER_SIZE
+*/
+LEXFLOATCLIENT_API int LF_CC GetProductVersionName(STRTYPE name, uint32_t length);
+
+/*
+    FUNCTION: GetProductVersionDisplayName()
+
+    PURPOSE: Gets the product version display name.
+
+    PARAMETERS:
+    * displayName - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the displayName parameter
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_PRODUCT_VERSION_NOT_LINKED, LF_E_BUFFER_SIZE
+*/
+LEXFLOATCLIENT_API int LF_CC GetProductVersionDisplayName(STRTYPE displayName, uint32_t length);
+
+/*
+    FUNCTION: GetProductVersionFeatureFlag()
+
+    PURPOSE: Gets the product version feature flag.
+
+    PARAMETERS:
+    * name - name of the feature flag
+    * enabled - pointer to the integer that receives the value - 0 or 1
+    * data - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the data parameter
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_PRODUCT_VERSION_NOT_LINKED, LF_E_FEATURE_FLAG_NOT_FOUND, LF_E_BUFFER_SIZE
+*/
+LEXFLOATCLIENT_API int LF_CC GetProductVersionFeatureFlag(CSTRTYPE name, uint32_t *enabled, STRTYPE data, uint32_t length);
+
+/*
     FUNCTION: GetHostLicenseMetadata()
 
     PURPOSE: Get the value of the license metadata field associated with the LexFloatServer license.
