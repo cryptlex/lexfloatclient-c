@@ -125,7 +125,7 @@ LEXFLOATCLIENT_API int LF_CC SetFloatingLicenseCallback(CallbackType callback);
 LEXFLOATCLIENT_API int LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
 
 /*
-    FUNCTION: GetProductVersionName()
+    FUNCTION: GetHostProductVersionName()
 
     PURPOSE: Gets the product version name.
 
@@ -135,10 +135,10 @@ LEXFLOATCLIENT_API int LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE va
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_PRODUCT_VERSION_NOT_LINKED, LF_E_BUFFER_SIZE
 */
-LEXFLOATCLIENT_API int LF_CC GetProductVersionName(STRTYPE name, uint32_t length);
+LEXFLOATCLIENT_API int LF_CC GetHostProductVersionName(STRTYPE name, uint32_t length);
 
 /*
-    FUNCTION: GetProductVersionDisplayName()
+    FUNCTION: GetHostProductVersionDisplayName()
 
     PURPOSE: Gets the product version display name.
 
@@ -148,10 +148,10 @@ LEXFLOATCLIENT_API int LF_CC GetProductVersionName(STRTYPE name, uint32_t length
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_PRODUCT_VERSION_NOT_LINKED, LF_E_BUFFER_SIZE
 */
-LEXFLOATCLIENT_API int LF_CC GetProductVersionDisplayName(STRTYPE displayName, uint32_t length);
+LEXFLOATCLIENT_API int LF_CC GetHostProductVersionDisplayName(STRTYPE displayName, uint32_t length);
 
 /*
-    FUNCTION: GetProductVersionFeatureFlag()
+    FUNCTION: GetHostProductVersionFeatureFlag()
 
     PURPOSE: Gets the product version feature flag.
 
@@ -163,7 +163,7 @@ LEXFLOATCLIENT_API int LF_CC GetProductVersionDisplayName(STRTYPE displayName, u
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_PRODUCT_VERSION_NOT_LINKED, LF_E_FEATURE_FLAG_NOT_FOUND, LF_E_BUFFER_SIZE
 */
-LEXFLOATCLIENT_API int LF_CC GetProductVersionFeatureFlag(CSTRTYPE name, uint32_t *enabled, STRTYPE data, uint32_t length);
+LEXFLOATCLIENT_API int LF_CC GetHostProductVersionFeatureFlag(CSTRTYPE name, uint32_t *enabled, STRTYPE data, uint32_t length);
 
 /*
     FUNCTION: GetHostLicenseMetadata()
