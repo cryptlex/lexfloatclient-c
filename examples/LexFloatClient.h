@@ -295,7 +295,7 @@ LEXFLOATCLIENT_API int LF_CC GetFloatingClientMetadata(CSTRTYPE key, STRTYPE val
 LEXFLOATCLIENT_API int LF_CC GetFloatingClientMeterAttributeUses(CSTRTYPE name, uint32_t *uses);
 
 /*
-    FUNCTION: GetFloatinglicenseMode()
+    FUNCTION: GetFloatingLicenseMode()
 
     PURPOSE: Gets the mode of the floating license (online or offline).
 
