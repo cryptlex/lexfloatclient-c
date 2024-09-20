@@ -5,6 +5,11 @@
 #include <stddef.h>
 #include "LexFloatStatusCodes.h"
 
+typedef struct
+{
+    int maxOfflineLeaseDuration;
+} HostConfig;
+
 #ifdef _WIN32
     /*
     Make sure you're using the MSVC or Intel compilers on Windows.
@@ -60,6 +65,9 @@
 #endif
 typedef void (LF_CC *CallbackType)(uint32_t);
 
+#define LF_USER ((uint32_t)10)
+#define LF_ALL_USERS ((uint32_t)11)
+
 /*
     FUNCTION: SetHostProductId()
 
@@ -73,6 +81,27 @@ typedef void (LF_CC *CallbackType)(uint32_t);
 */
 LEXFLOATCLIENT_API int LF_CC SetHostProductId(CSTRTYPE productId);
 
+/*
+    FUNCTION: SetPermissionFlag()
+
+    PURPOSE: Sets the permission flag.
+
+    This function must be called on every start of your program after SetHostProductId()
+    function in case the application allows borrowing of licenses or system wide activation.
+
+    PARAMETERS:
+    * flags - depending on your application's requirements, choose one of 
+      the following values: LF_USER, LF_ALL_USERS.
+
+      - LF_USER: This flag indicates that the application does not require
+        admin or root permissions to run.
+
+      - LF_ALL_USERS: This flag is specifically designed for Windows and should be used 
+        for system-wide activations.
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_INVALID_PERMISSION_FLAG
+*/
+LEXFLOATCLIENT_API int LF_CC SetPermissionFlag(uint32_t flags);
 /*
     FUNCTION: SetHostUrl()
 
@@ -123,6 +152,19 @@ LEXFLOATCLIENT_API int LF_CC SetFloatingLicenseCallback(CallbackType callback);
     LF_E_METADATA_VALUE_LENGTH, LF_E_ACTIVATION_METADATA_LIMIT
 */
 LEXFLOATCLIENT_API int LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
+
+/*
+    FUNCTION: GetFloatingClientLibraryVersion()
+
+    PURPOSE: Gets the version of this library.
+
+    PARAMETERS:
+    * libraryVersion - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the libraryVersion parameter
+    
+    RETURN CODES: LF_OK, LF_E_BUFFER_SIZE
+*/
+LEXFLOATCLIENT_API int LF_CC GetFloatingClientLibraryVersion(STRTYPE libraryVersion, uint32_t length);
 
 /*
     FUNCTION: GetHostProductVersionName()
@@ -187,13 +229,13 @@ LEXFLOATCLIENT_API int LF_CC GetHostLicenseMetadata(CSTRTYPE key, STRTYPE value,
 
     PARAMETERS:
     * name - name of the meter attribute
-    * allowedUses - pointer to the integer that receives the value
+    * allowedUses - pointer to the integer that receives the value. A value of -1 indicates unlimited allowed uses.
     * totalUses - pointer to the integer that receives the value
     * grossUses - pointer to the integer that receives the value
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_METER_ATTRIBUTE_NOT_FOUND
 */
-LEXFLOATCLIENT_API int LF_CC GetHostLicenseMeterAttribute(CSTRTYPE name, uint32_t *allowedUses, uint32_t *totalUses, uint32_t *grossUses);
+LEXFLOATCLIENT_API int LF_CC GetHostLicenseMeterAttribute(CSTRTYPE name, int64_t *allowedUses, uint64_t *totalUses, uint64_t *grossUses);
 
 /*
     FUNCTION: GetHostLicenseExpiryDate()
@@ -201,11 +243,43 @@ LEXFLOATCLIENT_API int LF_CC GetHostLicenseMeterAttribute(CSTRTYPE name, uint32_
     PURPOSE: Gets the license expiry date timestamp of the LexFloatServer license.
 
     PARAMETERS:
-    * expiryDate - pointer to the integer that receives the value
+    * expiryDate - pointer to the integer that receives the value.
+      A value of 0 indicates it has no expiry i.e a lifetime license. 
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
 */
 LEXFLOATCLIENT_API int LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
+
+/*
+    FUNCTION: GetHostConfig()
+
+    PURPOSE: Gets the host configuration.
+
+    This function sends a network request to LexFloatServer to get the configuration details.
+
+    PARAMETERS:
+    * hostConfigPtr - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the hostConfigPtr parameter
+     
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_HOST_URL, LF_E_BUFFER_SIZE
+    LF_E_INET, LF_E_CLIENT, LF_E_IP, LF_E_SERVER   
+*/
+LEXFLOATCLIENT_API int LF_CC GetHostConfig(HostConfig *hostConfigPtr, uint32_t length);
+
+/*
+    FUNCTION: GetFloatingClientMetadata()
+
+    PURPOSE: Gets the value of the floating client metadata.
+
+    PARAMETERS:
+    * key - key of the metadata field whose value you want to retrieve
+    * value - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the value parameter
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_BUFFER_SIZE,
+    LF_E_METADATA_KEY_NOT_FOUND
+*/
+LEXFLOATCLIENT_API int LF_CC GetFloatingClientMetadata(CSTRTYPE key, STRTYPE value, uint32_t length);
 
 /*
     FUNCTION: GetFloatingClientMeterAttributeUses()
@@ -221,6 +295,31 @@ LEXFLOATCLIENT_API int LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
 LEXFLOATCLIENT_API int LF_CC GetFloatingClientMeterAttributeUses(CSTRTYPE name, uint32_t *uses);
 
 /*
+    FUNCTION: GetFloatingLicenseMode()
+
+    PURPOSE: Gets the mode of the floating license (online or offline).
+
+    PARAMETERS:
+    * value - pointer to a buffer that receives the value of the string
+    * length - size of the buffer pointed to by the value parameter
+    
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_BUFFER_SIZE
+*/
+LEXFLOATCLIENT_API int LF_CC GetFloatingLicenseMode(STRTYPE modePtr, uint32_t length);
+
+/*
+    FUNCTION: GetFloatingClientLeaseExpiryDate()
+
+    PURPOSE: Gets the lease expiry date timestamp of the floating client.
+
+    PARAMETERS:
+    * leaseExpiryDate - pointer to the integer that receives the value
+
+    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
+*/
+LEXFLOATCLIENT_API int LF_CC GetFloatingClientLeaseExpiryDate(uint32_t *leaseExpiryDate);
+
+/*
     FUNCTION: RequestFloatingLicense()
 
     PURPOSE: Sends the request to lease the license from the LexFloatServer.
@@ -231,6 +330,23 @@ LEXFLOATCLIENT_API int LF_CC GetFloatingClientMeterAttributeUses(CSTRTYPE name, 
     LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED
 */
 LEXFLOATCLIENT_API int LF_CC RequestFloatingLicense();
+
+/*
+    FUNCTION: RequestOfflineFloatingLicense()
+
+    PURPOSE: Sends the request to lease the license from the LexFloatServer for offline usage.
+
+    The maximum value of lease duration is configured in the config.yml of LexFloatServer 
+
+    PARAMETERS:
+    * leaseDuration - value of the lease duration.
+
+    RETURN CODES: LF_OK, LF_FAIL, LF_E_PRODUCT_ID, LF_E_LICENSE_EXISTS, LF_E_HOST_URL,
+    LF_E_LICENSE_LIMIT_REACHED, LF_E_INET, LF_E_TIME, LF_E_CLIENT, LF_E_IP, LF_E_SERVER,
+    LF_E_SERVER_LICENSE_NOT_ACTIVATED, LF_E_SERVER_TIME_MODIFIED, LF_E_SERVER_LICENSE_SUSPENDED,
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER, LF_E_SERVER_LICENSE_EXPIRED, LF_E_WMIC, LF_E_SYSTEM_PERMISSION
+*/
+LEXFLOATCLIENT_API int LF_CC RequestOfflineFloatingLicense(uint32_t leaseDuration);
 
 /*
     FUNCTION: DropFloatingLicense()
@@ -252,7 +368,8 @@ LEXFLOATCLIENT_API int LF_CC DropFloatingLicense();
     PURPOSE: Checks whether any license has been leased or not. If yes,
     it retuns LF_OK.
 
-    RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_NO_LICENSE
+    RETURN CODES: LF_OK, LF_FAIL, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_TIME, LF_E_MACHINE_FINGERPRINT,
+    LF_E_WMIC
 */
 LEXFLOATCLIENT_API int LF_CC HasFloatingLicense();
 
