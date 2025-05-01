@@ -320,7 +320,7 @@ LEXFLOATCLIENT_API int LF_CC GetHostLicenseExpiryDate(uint32_t *expiryDate);
     This function sends a network request to LexFloatServer to get the configuration details.
 
     PARAMETERS:
-    * hostConfig - pointer to the buffer that receives the value of the HostConfig struct
+    * hostConfig - pointer to a buffer that receives the value of the HostConfig struct
     * length - size of the buffer pointed to by the hostConfig parameter
      
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_HOST_URL, LF_E_BUFFER_SIZE
