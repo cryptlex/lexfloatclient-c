@@ -219,6 +219,20 @@ enum LexFloatStatusCodes
     LF_E_PROXY_NOT_TRUSTED = 67,
 
     /*
+        CODE: LF_E_ENTITLEMENT_SET_NOT_LINKED
+
+        MESSAGE: No entitlement set is linked to the license.
+    */
+    LF_E_ENTITLEMENT_SET_NOT_LINKED = 68,
+
+    /*
+        CODE: LF_E_FEATURE_ENTITLEMENT_NOT_FOUND
+
+        MESSAGE: The feature entitlement does not exist.
+    */
+    LF_E_FEATURE_ENTITLEMENT_NOT_FOUND = 69,
+
+    /*
         CODE: LF_E_CLIENT
 
         MESSAGE: Client error.
@@ -266,7 +280,14 @@ enum LexFloatStatusCodes
 
         MESSAGE: The grace period for server license is over.
     */
-    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER = 76
+    LF_E_SERVER_LICENSE_GRACE_PERIOD_OVER = 76,
+
+    /*
+        CODE: LF_E_LEASE_EXCEEDS_SERVER_LICENSE_EXPIRY
+
+        MESSAGE: Requested offline lease duration exceeds server license expiry date.
+    */
+    LF_E_LEASE_EXCEEDS_SERVER_LICENSE_EXPIRY = 77
 };
 
 #endif // LEX_FLOAT_STATUS_CODES_H
