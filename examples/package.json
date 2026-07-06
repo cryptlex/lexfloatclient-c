@@ -1,0 +1,12 @@
+{
+  "name": "lexfloatclient-js-sample",
+  "version": "1.0.0",
+  "private": true,
+  "main": "sample.js",
+  "scripts": {
+    "start": "node sample.js"
+  },
+  "dependencies": {
+    "@cryptlex/lexfloatclient": "latest"
+  }
+}
