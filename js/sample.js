@@ -1,15 +1,15 @@
 /* eslint-disable new-cap */
-const { LexFloatClient, LexFloatStatusCodes, LexFloatClientException } = require('@cryptlex/lexfloatclient');
+const { LexFloatClient, LexFloatStatusCodes } = require('@cryptlex/lexfloatclient');
 
 function licenseCallback(status) {
-	if (LexFloatStatusCodes.LF_OK == status) {
+	if (LexFloatStatusCodes.LF_OK === status) {
 		console.log('The license lease has renewed successfully.');
-	} else if (LexFloatStatusCodes.LF_E_LICENSE_NOT_FOUND == status) {
+	} else if (LexFloatStatusCodes.LF_E_LICENSE_NOT_FOUND === status) {
 		console.log('The license expired before it could be renewed.');
-	} else if (LexFloatStatusCodes.LF_E_LICENSE_EXPIRED_INET == status) {
+	} else if (LexFloatStatusCodes.LF_E_LICENSE_EXPIRED_INET === status) {
 		console.log('The license expired due to network connection failure.');
 	} else {
-		console.log('The license renew failed due to other reason. Error code: ', status);
+		console.log('The license renewal failed due to another reason. Error code: ', status);
 	}
 }
 

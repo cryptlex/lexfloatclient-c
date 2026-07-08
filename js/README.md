@@ -10,7 +10,7 @@ This directory contains a console sample:
 - [sample.js](sample.js) — console sample
 
 ```bash
-cd examples
+cd js
 npm install
 node sample.js
 ```
