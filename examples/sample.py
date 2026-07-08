@@ -1,4 +1,3 @@
-import time
 import sys
 from cryptlex.lexfloatclient import LexFloatClient, LexFloatStatusCodes, LexFloatClientException
 # from cryptlex.lexfloatclient import *
@@ -38,5 +37,6 @@ def main():
         print('Error code:', exception.code, exception.message)
 
 
-main()
-input("Press Enter to continue...")
+if __name__ == "__main__":
+    main()
+    input("Press Enter to continue...")
