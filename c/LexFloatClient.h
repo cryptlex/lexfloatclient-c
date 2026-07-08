@@ -145,7 +145,7 @@ LEXFLOATCLIENT_API int LF_CC SetFloatingLicenseCallback(CallbackType callback);
     * value - string of maximum length 256 characters with utf-8 encoding.
 
     RETURN CODES: LF_OK, LF_E_PRODUCT_ID, LF_E_METADATA_KEY_LENGTH,
-    LF_E_METADATA_VALUE_LENGTH, LF_E_ACTIVATION_METADATA_LIMIT
+    LF_E_METADATA_VALUE_LENGTH, LF_E_FLOATING_CLIENT_METADATA_LIMIT
 */
 LEXFLOATCLIENT_API int LF_CC SetFloatingClientMetadata(CSTRTYPE key, CSTRTYPE value);
 
@@ -454,7 +454,7 @@ LEXFLOATCLIENT_API int LF_CC DropFloatingLicense();
     FUNCTION: HasFloatingLicense()
 
     PURPOSE: Checks whether any license has been leased or not. If yes,
-    it retuns LF_OK.
+    it returns LF_OK.
 
     RETURN CODES: LF_OK, LF_FAIL, LF_E_PRODUCT_ID, LF_E_NO_LICENSE, LF_E_TIME, LF_E_MACHINE_FINGERPRINT,
     LF_E_WMIC

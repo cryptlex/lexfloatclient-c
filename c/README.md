@@ -10,14 +10,15 @@ This directory contains a console sample:
 - [FloatSample.cpp](FloatSample.cpp) — console sample
 
 ```bash
-cd examples
+cd c
 make
 ./FloatSample
 ```
 
 Requires `libLexFloatClient.dylib`/`.so`/`.dll` in this directory (already bundled
-for macOS). Set your product ID and float server URL in `FloatSample.cpp` before
-running.
+for macOS). On Windows, also place the `LexFloatClient.lib` import library in the
+`x86/` or `x64/` directory so the sample can link. Set your product ID and float
+server URL in `FloatSample.cpp` before running.
 
 ## Documentation
 

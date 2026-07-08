@@ -86,7 +86,7 @@ enum LexFloatStatusCodes
     /*
         CODE: LF_E_LICENSE_LIMIT_REACHED
 
-        MESSAGE: The server has reached it's allowed limit of floating licenses.
+        MESSAGE: The server has reached its allowed limit of floating licenses.
     */
     LF_E_LICENSE_LIMIT_REACHED = 49,
 
@@ -119,9 +119,9 @@ enum LexFloatStatusCodes
     LF_E_METADATA_VALUE_LENGTH = 53,
 
     /*
-        CODE: LF_E_ACTIVATION_METADATA_LIMIT
+        CODE: LF_E_FLOATING_CLIENT_METADATA_LIMIT
 
-        MESSAGE: The floating client has reached it's metadata fields limit.
+        MESSAGE: The floating client has reached its metadata fields limit.
     */
     LF_E_FLOATING_CLIENT_METADATA_LIMIT = 54,
 
@@ -135,7 +135,7 @@ enum LexFloatStatusCodes
     /*
         CODE: LF_E_METER_ATTRIBUTE_USES_LIMIT_REACHED
 
-        MESSAGE: The meter attribute has reached it's usage limit.
+        MESSAGE: The meter attribute has reached its usage limit.
     */
     LF_E_METER_ATTRIBUTE_USES_LIMIT_REACHED = 56,
 
@@ -184,7 +184,7 @@ enum LexFloatStatusCodes
     /*
         CODE: LF_E_MAX_OFFLINE_LEASE_DURATION_EXCEEDED
 
-        MESSAGE: Maximum offline lease duration exeeded.
+        MESSAGE: Maximum offline lease duration exceeded.
     */
     LF_E_MAX_OFFLINE_LEASE_DURATION_EXCEEDED = 63,
 

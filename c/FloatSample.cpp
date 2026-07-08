@@ -4,7 +4,7 @@
 // Uncomment following for Windows static build
 /*
 #if _WIN32
-#define LEXFLOATCLIENT__STATIC
+#define LEXFLOATCLIENT_STATIC
 #pragma comment(lib, "winhttp")
 #if _WIN64
 #pragma comment(lib, "x64/libcurl_MD")
@@ -40,7 +40,7 @@ void LF_CC LicenceRenewCallback(uint32_t status)
 		printf("The license expired due to network connection failure.\n");
 		break;
 	default:
-		printf("The license renew failed due to other reason. Error code: %d\n", status);
+		printf("The license renewal failed due to another reason. Error code: %u\n", status);
 		break;
 	}
 }
@@ -102,7 +102,11 @@ int main(int argc, char *argv[])
 
 	if (LF_OK == status)
 	{
+#if _WIN32
+		printf("Metadata: %ls\n", buffer);
+#else
 		printf("Metadata: %s\n", buffer);
+#endif
 	}
 	else
 	{
