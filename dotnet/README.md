@@ -14,7 +14,7 @@ This directory contains three samples:
 ### csharp-dotnet-core (cross-platform, .NET 6)
 
 ```bash
-cd examples/csharp-dotnet-core
+cd dotnet/csharp-dotnet-core
 dotnet run
 ```
 

@@ -18,7 +18,7 @@ Public Class Form1
                 Me.statusLabel.Text = "The license expired due to network connection failure."
                 Exit Select
             Case Else
-                Me.statusLabel.Text = "The license renew failed due to other reason. Error code: " & status.ToString()
+                Me.statusLabel.Text = "The license renewal failed due to another reason. Error code: " & status.ToString()
                 Exit Select
         End Select
     End Sub
@@ -32,7 +32,7 @@ Public Class Form1
             LexFloatClient.RequestFloatingLicense()
             Me.statusLabel.Text = "License leased successfully!"
         Catch ex As LexFloatClientException
-            Me.statusLabel.Text = "Error code: " & ex.Code.ToString() & " Error message: " + ex.Message
+            Me.statusLabel.Text = "Error code: " & ex.Code.ToString() & " Error message: " & ex.Message
         End Try
     End Sub
 
@@ -45,7 +45,7 @@ Public Class Form1
             LexFloatClient.DropFloatingLicense()
             Me.statusLabel.Text = "License dropped successfully!"
         Catch ex As LexFloatClientException
-            Me.statusLabel.Text = "Error code: " & ex.Code.ToString() & " Error message: " + ex.Message
+            Me.statusLabel.Text = "Error code: " & ex.Code.ToString() & " Error message: " & ex.Message
         End Try
     End Sub
 End Class

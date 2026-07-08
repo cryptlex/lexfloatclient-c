@@ -25,7 +25,7 @@ namespace FloatSample
                     this.statusLabel.Text = "The license expired due to network connection failure.";
                     break;
                 default:
-                    this.statusLabel.Text = "The license renew failed due to other reason. Error code: " + status.ToString();
+                    this.statusLabel.Text = "The license renewal failed due to another reason. Error code: " + status.ToString();
                     break;
             }
         }

@@ -41,7 +41,7 @@ namespace Sample
                     Console.WriteLine("Host feature entitlements are null.");
                 }
                 Console.WriteLine(LexFloatClient.GetHostLicenseEntitlementSetTier());
-                Console.WriteLine("Press Enter to drop the license ...");
+                Console.WriteLine("Press any key to drop the license ...");
                 Console.ReadKey();
                 LexFloatClient.DropFloatingLicense();
                 Console.WriteLine("Success! License dropped successfully.");
@@ -68,7 +68,7 @@ namespace Sample
                     Console.WriteLine("The license expired due to network connection failure.");
                     break;
                 default:
-                    Console.WriteLine("The license renew failed due to other reason. Error code: " + status.ToString());
+                    Console.WriteLine("The license renewal failed due to another reason. Error code: " + status.ToString());
                     break;
             }
         }
