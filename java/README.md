@@ -10,7 +10,7 @@ This directory contains a console sample:
 - [FloatSample.java](floatsample/src/main/java/com/cryptlex/floatsample/FloatSample.java) — console sample
 
 ```bash
-cd examples/floatsample
+cd java/floatsample
 mvn compile exec:java
 ```
 

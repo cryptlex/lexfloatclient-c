@@ -19,7 +19,7 @@ class CallbackEventListener implements LicenseCallbackEvent {
             System.out.println("The license expired due to network connection failure.");
             break;
         default:
-            System.out.println("The license renew failed due to other reason. Error code: " + Integer.toString(status));
+            System.out.println("The license renewal failed due to another reason. Error code: " + Integer.toString(status));
             break;
         }
     }
