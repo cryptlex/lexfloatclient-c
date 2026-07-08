@@ -3,7 +3,7 @@ from cryptlex.lexfloatclient import LexFloatClient, LexFloatStatusCodes, LexFloa
 # from cryptlex.lexfloatclient import *
 
 
-def licence_callback_fn(status):
+def license_callback_fn(status):
     if LexFloatStatusCodes.LF_OK == status:
         print("The license lease has renewed successfully.")
     elif LexFloatStatusCodes.LF_E_LICENSE_NOT_FOUND == status:
@@ -11,7 +11,7 @@ def licence_callback_fn(status):
     elif LexFloatStatusCodes.LF_E_LICENSE_EXPIRED_INET == status:
         print("The license expired due to network connection failure.")
     else:
-        print("The license renew failed due to other reason. Error code: ", status)
+        print("The license renewal failed due to another reason. Error code: ", status)
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
         # Set the float server
         LexFloatClient.SetHostUrl("http://localhost:8090")
         # Set the license callback
-        LexFloatClient.SetFloatingLicenseCallback(licence_callback_fn)
+        LexFloatClient.SetFloatingLicenseCallback(license_callback_fn)
         # Request license lease
         LexFloatClient.RequestFloatingLicense()
         print("Success! License acquired. Press enter to get the license metadata...")

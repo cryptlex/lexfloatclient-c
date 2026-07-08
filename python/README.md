@@ -11,7 +11,7 @@ This directory contains a console sample:
 
 ```bash
 pip install cryptlex.lexfloatclient
-python examples/sample.py
+python sample.py
 ```
 
 Set your product ID and float server URL in `sample.py` before running.
