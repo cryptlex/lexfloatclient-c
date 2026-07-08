@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sample</string>
+    <string name="request_license">Request License</string>
+    <string name="drop_license">Drop License</string>
 </resources>

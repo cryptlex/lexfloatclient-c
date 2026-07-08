@@ -5,16 +5,16 @@ Android library.
 
 ## Running
 
-Open `examples/sample` in Android Studio and run the `app` module, or build from
+Open `android/sample` in Android Studio and run the `app` module, or build from
 the command line with the bundled Gradle wrapper:
 
 ```bash
-cd examples/sample
+cd android/sample
 ./gradlew assembleDebug
 ```
 
 Set your product ID and float server URL in
-[MainActivity.java](sample/app/src/main/java/com/cryptlex/Sample/MainActivity.java)
+[MainActivity.java](sample/app/src/main/java/com/cryptlex/sample/MainActivity.java)
 before running.
 
 ## Documentation

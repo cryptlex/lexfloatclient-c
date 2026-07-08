@@ -32,7 +32,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="requestLicense"
-                        android:text="Request License"/>
+                        android:text="@string/request_license"/>
 
                 <Space
                         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="dropLicense"
-                    android:text="Drop License" />
+                    android:text="@string/drop_license" />
 
                 <Space
                     android:layout_width="wrap_content"

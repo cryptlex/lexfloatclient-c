@@ -5,7 +5,6 @@ plugins {
 android {
     namespace "com.cryptlex.sample"
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.cryptlex.sample"
