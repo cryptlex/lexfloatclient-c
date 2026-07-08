@@ -43,8 +43,9 @@ func main() {
 	status = lexfloatclient.GetHostLicenseMetadata("key1", &metadataValue)
 	if lexfloatclient.LF_OK != status {
 		fmt.Println("Error getting license metadata. Code:", status)
+	} else {
+		fmt.Println(metadataValue)
 	}
-	fmt.Println(metadataValue)
 	status = lexfloatclient.DropFloatingLicense()
 	if lexfloatclient.LF_OK != status {
 		fmt.Println("Dropping license error code:", status)
