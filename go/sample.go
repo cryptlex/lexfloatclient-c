@@ -10,13 +10,13 @@ import (
 
 func licenseCallback(status int) {
 	if status == lexfloatclient.LF_OK {
-		fmt.Println("The license lease has renewed successfully.")
+		fmt.Println("The license lease was renewed successfully.")
 	} else if status == lexfloatclient.LF_E_LICENSE_NOT_FOUND {
 		fmt.Println("The license expired before it could be renewed.")
 	} else if status == lexfloatclient.LF_E_LICENSE_EXPIRED_INET {
 		fmt.Println("The license expired due to network connection failure.")
 	} else {
-		fmt.Println("The license renew failed due to other reason. Error code:", status)
+		fmt.Println("The license renewal failed due to another reason. Error code:", status)
 	}
 }
 

@@ -10,7 +10,7 @@ This directory contains a console sample:
 - [sample.go](sample.go) — console sample
 
 ```bash
-cd examples
+cd go
 go run .
 ```
 
