@@ -3,15 +3,16 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/cryptlex/lexfloatclient-go"
 	"os"
+
+	"github.com/cryptlex/lexfloatclient-go"
 )
 
 func licenseCallback(status int) {
 	if status == lexfloatclient.LF_OK {
 		fmt.Println("The license lease has renewed successfully.")
 	} else if status == lexfloatclient.LF_E_LICENSE_NOT_FOUND {
-		fmt.Println("he license expired before it could be renewed.")
+		fmt.Println("The license expired before it could be renewed.")
 	} else if status == lexfloatclient.LF_E_LICENSE_EXPIRED_INET {
 		fmt.Println("The license expired due to network connection failure.")
 	} else {
@@ -36,19 +37,19 @@ func main() {
 	if lexfloatclient.LF_OK != status {
 		fmt.Println("Error Code:", status)
 		os.Exit(1)
-	}  
+	}
 	fmt.Println("Success! License acquired.")
 	var metadataValue string
-    status = lexfloatclient.GetHostLicenseMetadata("key1", &metadataValue)
+	status = lexfloatclient.GetHostLicenseMetadata("key1", &metadataValue)
 	if lexfloatclient.LF_OK != status {
 		fmt.Println("Error getting license metadata. Code:", status)
-	}  
+	}
 	fmt.Println(metadataValue)
-    status = lexfloatclient.DropFloatingLicense()
+	status = lexfloatclient.DropFloatingLicense()
 	if lexfloatclient.LF_OK != status {
 		fmt.Println("Dropping license error code:", status)
-	}  
-    fmt.Println("Success! License dropped.")
-	fmt.Println("Press any key to exit...")
-	bufio.NewReader(os.Stdin).ReadByte()
+	}
+	fmt.Println("Success! License dropped.")
+	fmt.Println("Press Enter to exit...")
+	bufio.NewReader(os.Stdin).ReadString('\n')
 }
