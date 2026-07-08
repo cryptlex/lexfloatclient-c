@@ -7,6 +7,6 @@
     "start": "node sample.js"
   },
   "dependencies": {
-    "@cryptlex/lexfloatclient": "latest"
+    "@cryptlex/lexfloatclient": "^4.16.0"
   }
 }
