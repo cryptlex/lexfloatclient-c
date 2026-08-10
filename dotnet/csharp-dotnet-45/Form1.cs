@@ -39,7 +39,7 @@ namespace FloatSample
                 LexFloatClient.SetFloatingLicenseCallback(LicenceRenewCallback);
 
                 LexFloatClient.RequestFloatingLicense();
-                this.statusLabel.Text = "License leased successfully!";
+                this.statusLabel.Text = "License leased successfully! Entitlement set: " + LexFloatClient.GetHostLicenseEntitlementSetName();
             }
             catch (LexFloatClientException ex)
             {

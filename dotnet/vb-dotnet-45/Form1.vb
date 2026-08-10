@@ -30,7 +30,7 @@ Public Class Form1
             LexFloatClient.SetHostUrl("http://localhost:8090")
             LexFloatClient.SetFloatingLicenseCallback(AddressOf LicenceRenewCallback)
             LexFloatClient.RequestFloatingLicense()
-            Me.statusLabel.Text = "License leased successfully!"
+            Me.statusLabel.Text = "License leased successfully! Entitlement set: " & LexFloatClient.GetHostLicenseEntitlementSetName()
         Catch ex As LexFloatClientException
             Me.statusLabel.Text = "Error code: " & ex.Code.ToString() & " Error message: " & ex.Message
         End Try

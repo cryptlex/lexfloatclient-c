@@ -16,31 +16,7 @@ namespace Sample
 
                 LexFloatClient.RequestFloatingLicense();
                 Console.WriteLine("Success! License acquired.");
-                var hostConfig = LexFloatClient.GetHostConfig();
-                if (hostConfig != null)
-                {
-                    Console.WriteLine("Host config:");
-                    Console.WriteLine("  maxOfflineLeaseDuration: " + hostConfig.maxOfflineLeaseDuration);
-                }
-                else
-                {
-                    Console.WriteLine("Host config is null.");
-                }
-
-                var hostFeatureEntitlements = LexFloatClient.GetHostFeatureEntitlements();
-                if (hostFeatureEntitlements != null)
-                {
-                    Console.WriteLine("Host feature entitlements:");
-                    foreach (var feature in hostFeatureEntitlements)
-                    {
-                        Console.WriteLine("  Name: " + feature.FeatureName + ", DisplayName: " + feature.FeatureDisplayName + ", Value: " + feature.Value + ", BaseValue: " + feature.BaseValue + ", ExpiresAt: " + feature.ExpiresAt);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Host feature entitlements are null.");
-                }
-                Console.WriteLine(LexFloatClient.GetHostLicenseEntitlementSetTier());
+                Console.WriteLine(LexFloatClient.GetHostLicenseEntitlementSetName());
                 Console.WriteLine("Press any key to drop the license ...");
                 Console.ReadKey();
                 LexFloatClient.DropFloatingLicense();
