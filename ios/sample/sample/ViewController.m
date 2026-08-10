@@ -63,7 +63,22 @@ void LF_CC licenceRenewCallback(uint32_t status)
         return;
     }
     status = RequestFloatingLicense();
-    self.licenseStatusLabel.text = [NSString stringWithFormat:@"%d",status];
+    if(status != LF_OK)
+    {
+        self.licenseStatusLabel.text = [NSString stringWithFormat:@"%d",status];
+        return;
+    }
+
+    char entitlementSetName[256];
+    status = GetHostLicenseEntitlementSetName(entitlementSetName, 256);
+    if(status == LF_OK)
+    {
+        self.licenseStatusLabel.text = [NSString stringWithFormat:@"Entitlement set: %s",entitlementSetName];
+    }
+    else
+    {
+        self.licenseStatusLabel.text = [NSString stringWithFormat:@"%d",status];
+    }
 }
 - (IBAction)onDropLicenseClick:(id)sender {
     int status = DropFloatingLicense();
