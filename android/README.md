@@ -5,12 +5,12 @@ Android library.
 
 ## Running
 
-Open `android/sample` in Android Studio and run the `app` module, or build from
-the command line with the bundled Gradle wrapper:
+Open `android/sample` in Android Studio and run the `app` module, or build it from
+the command line with a local Gradle installation:
 
 ```bash
 cd android/sample
-./gradlew assembleDebug
+gradle assembleDebug
 ```
 
 Set your product ID and float server URL in
