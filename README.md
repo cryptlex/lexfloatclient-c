@@ -50,5 +50,5 @@ its own README with setup, build, and run instructions.
 
 ## Learn more
 
-- Documentation: https://docs.cryptlex.com
+- Documentation: https://cryptlex.com/docs
 - LexFloatClient reference: https://cryptlex.com/docs/sdks-and-apis/lexfloatclient
