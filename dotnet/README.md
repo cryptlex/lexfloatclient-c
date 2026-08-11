@@ -20,7 +20,7 @@ dotnet run
 
 ### csharp-dotnet-45 / vb-dotnet-45 (Windows, .NET Framework 4.5)
 
-Open the `.sln` in Visual Studio, restore NuGet packages, and run.
+Open the `.sln` file in Visual Studio, restore the NuGet packages, and run.
 
 Set your product ID and float server URL in the sample source before running.
 
