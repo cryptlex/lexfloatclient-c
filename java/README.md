@@ -20,4 +20,4 @@ Set your product ID and float server URL in `FloatSample.java` before running.
 
 Refer to the following for documentation:
 
-https://docs.cryptlex.com/floating-licenses/on-premise-floating-licenses/using-lexfloatclient
+https://cryptlex.com/docs/sdks-and-apis/lexfloatclient

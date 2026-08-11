@@ -15,13 +15,12 @@ make
 ./FloatSample
 ```
 
-Requires `libLexFloatClient.dylib`/`.so`/`.dll` in this directory (already bundled
-for macOS). On Windows, also place the `LexFloatClient.lib` import library in the
-`x86/` or `x64/` directory so the sample can link. Set your product ID and float
-server URL in `FloatSample.cpp` before running.
+Requires the LexFloatClient library for your platform
+(`libLexFloatClient.dylib`/`.so`/`.dll`) in this directory. Download it from the Cryptlex dashboard.
+On Windows, also place the `LexFloatClient.lib` import library in the `x86/` or `x64/` directory so the sample can link. Set your product ID and float server URL in `FloatSample.cpp` before running.
 
 ## Documentation
 
 Refer to the following for documentation:
 
-https://docs.cryptlex.com/floating-licenses/on-premise-floating-licenses/using-lexfloatclient
+https://cryptlex.com/docs/sdks-and-apis/lexfloatclient

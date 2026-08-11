@@ -39,12 +39,12 @@ func main() {
 		os.Exit(1)
 	}
 	fmt.Println("Success! License acquired.")
-	var metadataValue string
-	status = lexfloatclient.GetHostLicenseMetadata("key1", &metadataValue)
+	var entitlementSetName string
+	status = lexfloatclient.GetHostLicenseEntitlementSetName(&entitlementSetName)
 	if lexfloatclient.LF_OK != status {
-		fmt.Println("Error getting license metadata. Code:", status)
+		fmt.Println("Error getting license entitlement set name. Code:", status)
 	} else {
-		fmt.Println(metadataValue)
+		fmt.Println(entitlementSetName)
 	}
 	status = lexfloatclient.DropFloatingLicense()
 	if lexfloatclient.LF_OK != status {

@@ -28,13 +28,13 @@ function main() {
 		LexFloatClient.RequestFloatingLicense();
 		console.log('Success! License acquired!');
 
-		// console.log("Requesting license metadata...");
-		// metadataValue = LexFloatClient.GetHostLicenseMetadata("key1");
-		// console.log(metadataValue);
+		console.log('Requesting license entitlement set name...');
+		const entitlementSetName = LexFloatClient.GetHostLicenseEntitlementSetName();
+		console.log(entitlementSetName);
 
-		// console.log("Dropping the license ...");
-		// LexFloatClient.DropFloatingLicense();
-		// console.log("Success! License dropped.");
+		console.log('Dropping the license ...');
+		LexFloatClient.DropFloatingLicense();
+		console.log('Success! License dropped.');
 	} catch (error) {
 		console.log(error.code, error.message);
 	}

@@ -1,6 +1,5 @@
 import sys
 from cryptlex.lexfloatclient import LexFloatClient, LexFloatStatusCodes, LexFloatClientException
-# from cryptlex.lexfloatclient import *
 
 
 def license_callback_fn(status):
@@ -24,10 +23,10 @@ def main():
         LexFloatClient.SetFloatingLicenseCallback(license_callback_fn)
         # Request license lease
         LexFloatClient.RequestFloatingLicense()
-        print("Success! License acquired. Press enter to get the license metadata...")
+        print("Success! License acquired. Press enter to get the license entitlement set name...")
         sys.stdin.read(1)
-        # Request license metadata
-        # metadata_value = LexFloatClient.GetHostLicenseMetadata("key1")
+        # Get the license entitlement set name
+        print(LexFloatClient.GetHostLicenseEntitlementSetName())
         print("Press enter to drop the license ...")
         sys.stdin.read(1)
         # Drop license lease

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             LexFloatClient.AddLicenseCallbackListener(eventListener);
 
             LexFloatClient.RequestFloatingLicense();
-            statusTextView.setText("Success! License acquired");
+            statusTextView.setText("Success! License acquired. Entitlement set: " + LexFloatClient.GetHostLicenseEntitlementSetName());
         } catch (LexFloatClientException ex) {
             statusTextView.setText(ex.getCode() + ": " + ex.getMessage());
         }

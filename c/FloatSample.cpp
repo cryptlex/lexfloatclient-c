@@ -89,28 +89,27 @@ int main(int argc, char *argv[])
 	}
 	printf("Success! License acquired.\n");
 
-	printf("Press enter to get license metadata ...\n");
+	printf("Press enter to get the license entitlement set name ...\n");
 	getchar();
 
 #if _WIN32
 	wchar_t buffer[256];
-	status = GetHostLicenseMetadata(L"key1", buffer, 256);
 #else
 	char buffer[256];
-	status = GetHostLicenseMetadata("key1", buffer, 256);
 #endif
+	status = GetHostLicenseEntitlementSetName(buffer, 256);
 
 	if (LF_OK == status)
 	{
 #if _WIN32
-		printf("Metadata: %ls\n", buffer);
+		printf("Entitlement set name: %ls\n", buffer);
 #else
-		printf("Metadata: %s\n", buffer);
+		printf("Entitlement set name: %s\n", buffer);
 #endif
 	}
 	else
 	{
-		printf("Error getting metadata: %d\n", status);
+		printf("Error getting entitlement set name: %d\n", status);
 	}
 
 	printf("Press enter to drop the license ...\n");
