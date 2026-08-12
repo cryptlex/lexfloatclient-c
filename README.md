@@ -22,8 +22,8 @@ How the pieces fit together:
 LexFloatClient is **not** standalone. It needs a reachable LexFloatServer on the network.
 
 > Want licenses that activate directly against the Cryptlex cloud or an on-premise Cryptlex
-> server (node-locked, hosted floating, or trials)? Use **LexActivator** instead. See
-> `lexactivator-examples`.
+> server (node-locked, hosted floating, or trials)? Use [LexActivator](https://cryptlex.com/docs/sdks-and-apis/lexactivator) instead. See
+> [lexactivator-examples](https://github.com/cryptlex/lexactivator-examples).
 
 ## What's in this directory
 
