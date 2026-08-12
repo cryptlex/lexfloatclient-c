@@ -6,11 +6,11 @@ LexFloatServer using **LexFloatClient**, across a range of languages and platfor
 ## What is LexFloatClient?
 
 LexFloatClient is Cryptlex's client library for consuming floating licenses served by a
-**LexFloatServer** running on your local network. Instead of each machine contacting the
-Cryptlex cloud, your application leases a floating seat from a LexFloatServer instance on
-the LAN and releases it when it's done. This is designed for environments where end-user
-machines have no internet access but you still want a shared pool of concurrent licenses
-within the network.
+**LexFloatServer** running on-premise within the local network. Instead of each machine
+contacting the Cryptlex cloud, your application leases a floating seat from a LexFloatServer
+instance on the LAN and releases it when it's done. This is designed for environments where
+end-user machines have no internet access but you still want a shared pool of concurrent
+licenses within the network.
 
 How the pieces fit together:
 
