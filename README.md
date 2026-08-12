@@ -14,10 +14,8 @@ licenses within the network.
 
 How the pieces fit together:
 
-- **LexFloatServer** runs on-premise and holds the pool of floating licenses. Its own
-  license is activated against Cryptlex using **LexActivator**.
-- **LexFloatClient** (this library) runs inside your application and requests, holds, and
-  releases a seat from that LexFloatServer.
+- **LexFloatServer** runs on-premise and holds the pool of floating licenses. It is activated against Cryptlex using an on-premise floating license.
+- **LexFloatClient** integrates with your application and requests, renews, and drops a seat from that LexFloatServer.
 
 LexFloatClient is **not** standalone. It needs a reachable LexFloatServer on the network.
 
